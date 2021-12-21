@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { PRODUCT_LOAD_IN_PROGRESS, PRODUCT_LOAD_FAIL, PRODUCT_ADD_BY_ID, GET_PRODUCTS_BY_LIMIT, LOADING } from '../typesAction';
+import { 
+  PRODUCT_LOAD_IN_PROGRESS, 
+  PRODUCT_LOAD_FAIL, 
+  PRODUCT_ADD_BY_ID, 
+  GET_PRODUCTS_BY_LIMIT, 
+  LOADING,
+  GET_ALL_CATEGORIES
+} from '../typesAction';
 
 
 // ACTIONS
@@ -28,10 +35,6 @@ const resultOfLoadById = async(id) => {
   return action;
 };
 
-const getProductById = async(id, dispatch) => {
-  dispatch(await startLoadProduct(id));
-  dispatch(await resultOfLoadById(id));
-};
 
 
 const startLoading = () => {
@@ -55,10 +58,29 @@ const actionGetByLimit = async () => {
   return action;
 };
 
+const getAllCategories = async () => {
+  const result = await axios.get('https://fakestoreapi.com/products/categories');
+  if(result.status !== 200) {
+    return({ 
+      type: PRODUCT_LOAD_FAIL
+    })
+  };
+  const action = {
+    type: GET_ALL_CATEGORIES,
+    payload: { data: result.data}
+  }
+}
+
+// COMPOSITONS
+const getProductById = async(id, dispatch) => {
+  dispatch(await startLoadProduct(id));
+  dispatch(await resultOfLoadById(id));
+};
 const getProductsByLimit = async(dispatch) => {
   // dispatch(startLoading());
   dispatch(await actionGetByLimit());
 }
+
 
 
 
