@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -15,7 +16,6 @@ export default function AppLayout({children}) {
   const [ collapsed, setCollapsed ] = useState(false);
 
   const onCollapse = close => {
-    console.log(close);
     setCollapsed(close);
   };
 
@@ -29,27 +29,30 @@ export default function AppLayout({children}) {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                Categories
+                <NavLink to='/products'> Products </NavLink>
               </Menu.Item>
               <Menu.Item key="2" icon={<DesktopOutlined />}>
                 Option 2
               </Menu.Item>
-              <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                <Menu.Item key="3">Tom</Menu.Item>
-                <Menu.Item key="4">Bill</Menu.Item>
-                <Menu.Item key="5">Alex</Menu.Item>
-              </SubMenu>
+              <NavLink to='/categories'>
+                <SubMenu key="sub1" icon={<UserOutlined />} title="Categories">
+                  <Menu.Item key="3">electronics</Menu.Item>
+                  <Menu.Item key="4">jewelery</Menu.Item>
+                  <Menu.Item key="5">men's clothing</Menu.Item>
+                  <Menu.Item key="7">women's clothing</Menu.Item>
+                </SubMenu>
+              </NavLink>
               <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
                 <Menu.Item key="6">Team 1</Menu.Item>
                 <Menu.Item key="8">Team 2</Menu.Item>
               </SubMenu>
               <Menu.Item key="9" icon={<FileOutlined />}>
-                Files
+                Store
               </Menu.Item>
             </Menu>
           </Sider>
           <Layout className="site-layout">
-           
+{/* CONTENT */}
             <Content style={{ margin: '0 16px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>User</Breadcrumb.Item>

@@ -1,42 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Card from '../components/card.js';
-import { getProductsByLimit, getProductById } from '../reducer/actions.js'
+import AppLayout from '../containers/AppLayout';
+import Categories from '../containers/Categories';
+import Products from '../containers/Products';
 import 'antd/dist/antd.css';
-import { Row, Col } from 'antd';
-import Sprinner from '../components/Sprinner.js';
 import style from './App.module.css';
 
 function App() {
-  const [ idNum, setIdNum ] = useState();
-  const store = useSelector( state => state);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getProductsByLimit(dispatch)
-    // console.log(store)
-  }, []);
-  const isLoading = store.arrProductStatus !== 'SUCCESS';
-
-  const onButton = () => {
-    getProductById(idNum, dispatch)
-  }
 
   return (
-    <div>
-    <Row gutter={16} >
-          {isLoading ?
-          <Sprinner style={{position: 'absolute', bottom: '50px'}}/> :
-          store.products.map(prod =>  (
-            <Col key={prod.id} className={style.card_margin}>
-              <Card product={prod} />
-            </Col>
-          ))}
-    </Row>
+    <AppLayout>
+      <Routes>
+        <Route exact path='/categories' element={ <Categories /> } />
+        <Route exact path='/products' element={ <Products /> } />
+
+      </Routes>
+    </AppLayout>
+
      
-    <input type="number" onChange={(e) => setIdNum(e.target.value)} />
-    <button onClick={() => onButton()} type="button" >get products</button>
-    <button >click2</button>
-    </div>
+
+
   );
 }
 

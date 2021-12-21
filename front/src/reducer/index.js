@@ -6,6 +6,7 @@ import { PRODUCT_LOAD_IN_PROGRESS, PRODUCT_LOAD_FAIL, PRODUCT_ADD_BY_ID, GET_PRO
 // image: `https://pic.onlinewebfonts.com/svg/img_352782.png`
 
 const initialState = {
+  categoreis: [],
   products: []
 };
 
