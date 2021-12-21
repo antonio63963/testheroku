@@ -5,14 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer';
-
+import AppLayout from './containers/AppLayout';
 
 const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AppLayout>
+        <App />
+      </AppLayout>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

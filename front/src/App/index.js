@@ -5,6 +5,7 @@ import { getProductsByLimit, getProductById } from '../reducer/actions.js'
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import Sprinner from '../components/Sprinner.js';
+import style from './App.module.css';
 
 function App() {
   const [ idNum, setIdNum ] = useState();
@@ -26,7 +27,7 @@ function App() {
           {isLoading ?
           <Sprinner style={{position: 'absolute', bottom: '50px'}}/> :
           store.products.map(prod =>  (
-            <Col key={prod.id} >
+            <Col key={prod.id} className={style.card_margin}>
               <Card product={prod} />
             </Col>
           ))}
