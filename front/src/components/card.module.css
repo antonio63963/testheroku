@@ -1,0 +1,32 @@
+.imgCard  {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.imgWrapper {
+  height: 300px;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spinner {
+  position: absolute;
+  z-index: 2;
+}
+.card {
+  position: relative;
+}
+
+.card>.focussedCard {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+}
+.hidden {
+  display: hidden;
+}
+.dispNone {
+  display: none;
+}
