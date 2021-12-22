@@ -39,8 +39,7 @@ const resultOfLoadById = async(id) => {
 
 const startLoading = () => {
   return ({
-    type: LOADING,
-    arrProductStatus: LOADING
+    type: LOADING
   })
 }
 const actionGetByLimit = async () => {
@@ -82,6 +81,7 @@ const getProductsByLimit = async(dispatch) => {
   dispatch(await actionGetByLimit());
 }
 const initApp = async(dispatch) => {
+  dispatch(startLoading())
   const { payload } = await actionGetByLimit();
   const { products } = payload;
   const action = await actionCategories();

@@ -21,6 +21,11 @@ const reducer = (state = initialState, action) => {
   };
 
   switch(action.type) {
+    case LOADING: {
+      return update(state, {
+        arrProductStatus: {$set: {LOADING}}
+      })
+    }
     case PRODUCT_LOAD_IN_PROGRESS: {
       const product = {
         id: Number(action.payload.id), status: 'in_progress', 
@@ -61,6 +66,7 @@ const reducer = (state = initialState, action) => {
       return update(state, {
         categories: {$set: action.payload.categories},
         products: {$set: action.payload.products},
+        arrProductStatus: {$set: 'SUCCESS'}
       })
     }
     default: 
