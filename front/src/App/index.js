@@ -6,11 +6,16 @@ import AppLayout from '../containers/AppLayout';
 import Categories from '../containers/Categories';
 import Products from '../containers/Products';
 import ActionCard from '../components/ActionCard'
-
+import { useDispatch } from 'react-redux';
+import { initApp } from '../reducer/actions'
 
 
 function App() {
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    initApp(dispatch)
+    // console.log(store)
+  }, []);
   return (
     <AppLayout>
       <Routes>

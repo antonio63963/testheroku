@@ -1,4 +1,6 @@
 import { React, useState } from 'react';
+import { getAllCategories } from '../../reducer/actions';
+import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -12,9 +14,11 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
+
+
 export default function AppLayout({children}) {
   const [ collapsed, setCollapsed ] = useState(false);
-
+  const dispatch = useDispatch();
   const onCollapse = close => {
     setCollapsed(close);
   };

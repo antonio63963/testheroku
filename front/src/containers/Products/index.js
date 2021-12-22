@@ -10,11 +10,11 @@ import style from './products.module.css';
 function Products() {
 
   const store = useSelector( state => state);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getProductsByLimit(dispatch)
-    // console.log(store)
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   getProductsByLimit(dispatch)
+  //   // console.log(store)
+  // }, []);
   const isLoading = store.arrProductStatus !== 'SUCCESS';
 
   return (

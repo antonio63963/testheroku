@@ -1,12 +1,16 @@
 import update from 'immutability-helper';
-import { PRODUCT_LOAD_IN_PROGRESS, PRODUCT_LOAD_FAIL, PRODUCT_ADD_BY_ID, GET_PRODUCTS_BY_LIMIT, LOADING} from '../typesAction';
-// id: 0,
-// title: 'No title',
-// price: 0,
-// image: `https://pic.onlinewebfonts.com/svg/img_352782.png`
+import { 
+  PRODUCT_LOAD_IN_PROGRESS, 
+  PRODUCT_LOAD_FAIL, 
+  PRODUCT_ADD_BY_ID, 
+  GET_PRODUCTS_BY_LIMIT, 
+  LOADING,
+  INIT_APP
+} from '../typesAction';
+
 
 const initialState = {
-  categoreis: [],
+  categories: [],
   products: []
 };
 
@@ -50,10 +54,15 @@ const reducer = (state = initialState, action) => {
     case GET_PRODUCTS_BY_LIMIT : {
 
       return update(state, {
-        products: {$set: action.payload.data}, 
+        products: {$set: action.payload.products}, 
         arrProductStatus: {$set: 'SUCCESS'}})
     }
-
+    case INIT_APP: {
+      return update(state, {
+        categories: {$set: action.payload.categories},
+        products: {$set: action.payload.products},
+      })
+    }
     default: 
      return state
   }

@@ -5,7 +5,7 @@ import {
   PRODUCT_ADD_BY_ID, 
   GET_PRODUCTS_BY_LIMIT, 
   LOADING,
-  GET_ALL_CATEGORIES
+  INIT_APP
 } from '../typesAction';
 
 
@@ -53,12 +53,12 @@ const actionGetByLimit = async () => {
   };
   const action = {
     type: GET_PRODUCTS_BY_LIMIT,
-    payload: { data: result.data.payload}
+    payload: { products: result.data.payload}
   };
   return action;
 };
 
-const getAllCategories = async () => {
+const actionCategories = async () => {
   const result = await axios.get('https://fakestoreapi.com/products/categories');
   if(result.status !== 200) {
     return({ 
@@ -66,9 +66,10 @@ const getAllCategories = async () => {
     })
   };
   const action = {
-    type: GET_ALL_CATEGORIES,
-    payload: { data: result.data}
+    type: INIT_APP,
+    payload: { categories: result.data}
   }
+  return action;
 }
 
 // COMPOSITONS
@@ -80,11 +81,20 @@ const getProductsByLimit = async(dispatch) => {
   // dispatch(startLoading());
   dispatch(await actionGetByLimit());
 }
+const initApp = async(dispatch) => {
+  const { payload } = await actionGetByLimit();
+  const { products } = payload;
+  const action = await actionCategories();
+  action.payload = {...action.payload, products};
+  console.log('action; ', action);
+  dispatch(action);
+}
 
 
 
 
 export {
   getProductById,
-  getProductsByLimit
+  getProductsByLimit,
+  initApp
 }
