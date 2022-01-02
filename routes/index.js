@@ -14,6 +14,7 @@ router.get('/products', async(req, res, next) => {
   const {data} = await axios.get(`${url}?limit=10`);
   console.log(data);
   res.send({status: 'ok', payload: data});
+  next();
 });
 
 router.get('/addProdID/:id', async(req, res) => {

@@ -22,6 +22,10 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// get all html from build react
+app.get('*', (req, res)=>{
+  res.sendFile(path.resolve(__dirname, 'build/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
